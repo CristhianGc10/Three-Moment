@@ -1,0 +1,44 @@
+{
+    "name": "calculadora-clapeyron",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "description": "Calculadora de alfas para el Teorema de Clapeyron - Método de los Tres Momentos",
+    "keywords": [
+        "react",
+        "typescript",
+        "structural-engineering",
+        "clapeyron",
+        "civil-engineering"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview",
+        "type-check": "tsc --noEmit"
+    },
+    "dependencies": {
+        "clsx": "^2.0.0",
+        "lucide-react": "^0.294.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tailwind-merge": "^2.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.0",
+        "@types/react": "^18.2.43",
+        "@types/react-dom": "^18.2.17",
+        "@typescript-eslint/eslint-plugin": "^6.14.0",
+        "@typescript-eslint/parser": "^6.14.0",
+        "@vitejs/plugin-react": "^4.2.1",
+        "autoprefixer": "^10.4.21",
+        "eslint": "^8.55.0",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.5",
+        "postcss": "^8.5.4",
+        "tailwindcss": "^3.4.17",
+        "typescript": "^5.2.2",
+        "vite": "^5.0.8"
+    }
+}

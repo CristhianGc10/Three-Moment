@@ -1,0 +1,477 @@
+/* src/styles/components.css - VERSIÓN LIMPIA */
+
+/* ==============================================
+   COMPONENTES ESPECÍFICOS Y ESPECIALIZADOS
+   ============================================== */
+
+/* Botones Especializados */
+.btn-calculate {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-calculate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-calculate:active {
+    transform: translateY(0);
+}
+
+.btn-calculate::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.btn-calculate:hover::before {
+    left: 100%;
+}
+
+/* Cards con Efectos Especiales */
+.card-results {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-results::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 30% 50%,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 50%
+    );
+    pointer-events: none;
+}
+
+.card-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs con Efectos de Foco Mejorados */
+.input-enhanced {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-enhanced input {
+    @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-enhanced input:focus {
+    @apply border-blue-500 outline-none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    transform: translateY(-1px);
+}
+
+.input-enhanced label {
+    @apply block text-sm font-medium text-gray-700 mb-2;
+    transition: color 0.3s ease;
+}
+
+.input-enhanced input:focus + label,
+.input-enhanced:focus-within label {
+    @apply text-blue-600;
+}
+
+/* Resultados de Alpha */
+.alpha-result {
+    @apply text-center p-6 rounded-xl;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.7) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.alpha-result::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        transparent,
+        rgba(59, 130, 246, 0.1),
+        transparent
+    );
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+.alpha-result .alpha-value {
+    @apply text-4xl font-bold mb-2;
+    background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 3s ease-in-out infinite;
+}
+
+/* Canvas Container */
+.canvas-container {
+    @apply relative rounded-xl overflow-hidden;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.canvas-container canvas {
+    @apply w-full h-auto;
+    transition: filter 0.3s ease;
+}
+
+.canvas-container:hover canvas {
+    filter: brightness(1.02) contrast(1.05);
+}
+
+/* Selector de Tipo de Carga */
+.load-type-selector {
+    @apply grid grid-cols-3 gap-2 p-1 bg-gray-100 rounded-lg;
+}
+
+.load-type-option {
+    @apply px-4 py-2 rounded-md text-sm font-medium text-center cursor-pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.load-type-option:not(.active) {
+    @apply text-gray-600 hover:text-gray-800 hover:bg-gray-200;
+}
+
+.load-type-option.active {
+    @apply text-white shadow-sm;
+}
+
+.load-type-option.active.point {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.load-type-option.active.distributed {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.load-type-option.active.moment {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+/* Indicadores de Estado */
+.status-indicator {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.status-indicator.calculating {
+    @apply bg-blue-100 text-blue-800;
+}
+
+.status-indicator.complete {
+    @apply bg-green-100 text-green-800;
+}
+
+.status-indicator.error {
+    @apply bg-red-100 text-red-800;
+}
+
+.status-indicator.warning {
+    @apply bg-yellow-100 text-yellow-800;
+}
+
+/* Animaciones Loading */
+.loading-spinner {
+    @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full;
+    animation: spin 1s linear infinite;
+}
+
+.loading-dots {
+    @apply inline-flex gap-1;
+}
+
+.loading-dots span {
+    @apply w-2 h-2 bg-current rounded-full;
+    animation: pulse-dot 1.4s ease-in-out infinite both;
+}
+
+.loading-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+.loading-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+.loading-dots span:nth-child(3) {
+    animation-delay: 0s;
+}
+
+/* Tooltips */
+.tooltip {
+    @apply absolute z-50 px-3 py-2 text-sm text-white bg-gray-900 rounded-lg shadow-lg;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(5px);
+}
+
+.tooltip.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2937;
+}
+
+/* Efectos de Entrada */
+.slide-in {
+    animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.scale-in {
+    animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Patrones de fondo decorativos */
+.pattern-dots {
+    background-image: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.1) 1px,
+        transparent 1px
+    );
+    background-size: 20px 20px;
+}
+
+.pattern-grid {
+    background-image: linear-gradient(
+            rgba(59, 130, 246, 0.1) 1px,
+            transparent 1px
+        ),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Estados de validación */
+.validation-error {
+    @apply border-red-300 bg-red-50;
+    animation: shake 0.5s ease-in-out;
+}
+
+.validation-success {
+    @apply border-green-300 bg-green-50;
+    animation: success-pulse 0.6s ease-in-out;
+}
+
+/* Efectos para elementos interactivos */
+.interactive-element {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-element:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.interactive-element:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ==============================================
+   KEYFRAMES ESPECÍFICAS DE COMPONENTES
+   ============================================== */
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes gradient-shift {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse-dot {
+    0%,
+    80%,
+    100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes success-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animación para valores numéricos */
+@keyframes number-glow {
+    0%,
+    100% {
+        text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+    }
+}
+
+.number-highlight {
+    animation: number-glow 2s ease-in-out infinite;
+}
+
+/* Shimmer effect para botones */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+/* ==============================================
+   RESPONSIVE ESPECÍFICO
+   ============================================== */
+
+@media (max-width: 768px) {
+    .canvas-container canvas {
+        min-height: 300px;
+    }
+
+    .alpha-result .alpha-value {
+        @apply text-2xl;
+    }
+
+    .load-type-selector {
+        @apply grid-cols-1 gap-3;
+    }
+}
+
+/* ==============================================
+   MODO OSCURO (COMPONENTES)
+   ============================================== */
+
+@media (prefers-color-scheme: dark) {
+    .card-glass {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .input-enhanced input {
+        @apply bg-gray-800 border-gray-600 text-white;
+    }
+
+    .tooltip {
+        @apply bg-gray-100 text-gray-900;
+    }
+
+    .tooltip::before {
+        border-top-color: #f3f4f6;
+    }
+}

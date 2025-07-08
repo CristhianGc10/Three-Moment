@@ -1,0 +1,386 @@
+/* src/styles/spin-buttons.css - VERSIÓN CON SPIN BUTTONS GRIS CLARO */
+
+/* ==============================================
+   SPIN BUTTONS PERSONALIZADOS - GRIS CLARO
+   ============================================== */
+
+/* Contenedor para spin buttons personalizados */
+.custom-number-input {
+    position: relative;
+}
+
+/* Spin buttons personalizados para inputs con unidades */
+.custom-number-input input[type='number'] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+/* Ocultar spin buttons nativos de WebKit */
+.custom-number-input input[type='number']::-webkit-outer-spin-button,
+.custom-number-input input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Contenedor para botones personalizados */
+.custom-spin-buttons {
+    position: absolute;
+    right: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+
+/* Mostrar botones en hover del input */
+.custom-number-input:hover .custom-spin-buttons,
+.custom-number-input input:focus + .custom-spin-buttons {
+    opacity: 1;
+}
+
+/* Estilos para cada botón - GRIS CLARO */
+.custom-spin-button {
+    width: 20px;
+    height: 16px;
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 8px;
+    color: #6b7280;
+    user-select: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.custom-spin-button:hover {
+    background: linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%);
+    border-color: #9ca3af;
+    color: #374151;
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(156, 163, 175, 0.3);
+}
+
+.custom-spin-button:active {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+}
+
+/* Botón incrementar */
+.custom-spin-button.increment {
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+}
+
+/* Botón decrementar */
+.custom-spin-button.decrement {
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+    border-top: none;
+}
+
+/* Iconos para los botones */
+.custom-spin-button::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+}
+
+.custom-spin-button.increment::before {
+    border-bottom: 4px solid currentColor;
+}
+
+.custom-spin-button.decrement::before {
+    border-top: 4px solid currentColor;
+}
+
+/* ==============================================
+   VARIANTES DE POSICIONAMIENTO
+   ============================================== */
+
+/* Para inputs con diferentes tamaños de unidades */
+.custom-number-input.size-sm .custom-spin-buttons {
+    right: 90px; /* Para unidades cortas como "m", "kg" */
+}
+
+.custom-number-input.size-md .custom-spin-buttons {
+    right: 105px; /* Para unidades medianas como "kN/m" */
+}
+
+.custom-number-input.size-lg .custom-spin-buttons {
+    right: 115px; /* Para unidades largas como "kN⋅m" */
+}
+
+/* Ajuste automático basado en el ancho del select de unidades */
+.custom-number-input.units-short .custom-spin-buttons {
+    right: 75px;
+}
+
+.custom-number-input.units-medium .custom-spin-buttons {
+    right: 88px;
+}
+
+.custom-number-input.units-long .custom-spin-buttons {
+    right: 105px;
+}
+
+/* ==============================================
+   ESTADOS ESPECIALES
+   ============================================== */
+
+/* Estados de focus mejorados */
+.custom-number-input input:focus + .custom-spin-buttons .custom-spin-button {
+    border-color: #9ca3af;
+    box-shadow: 0 0 0 1px rgba(156, 163, 175, 0.2);
+}
+
+/* Para inputs con error */
+.custom-number-input.has-error .custom-spin-button {
+    border-color: #ef4444;
+    background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
+    color: #ffffff;
+}
+
+.custom-number-input.has-error .custom-spin-button:hover {
+    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+    border-color: #dc2626;
+}
+
+/* Para inputs deshabilitados */
+.custom-number-input input:disabled + .custom-spin-buttons {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.custom-number-input input:disabled + .custom-spin-buttons .custom-spin-button {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    border-color: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* Para inputs de solo lectura */
+.custom-number-input input:read-only + .custom-spin-buttons {
+    display: none;
+}
+
+/* ==============================================
+   ANIMACIONES
+   ============================================== */
+
+/* Animación suave para la aparición */
+@keyframes spinButtonsAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+.custom-number-input:hover .custom-spin-buttons {
+    animation: spinButtonsAppear 0.2s ease-out;
+}
+
+/* Micro-animación para clicks */
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.custom-spin-button:active {
+    animation: buttonPress 0.1s ease-out;
+}
+
+/* ==============================================
+   RESPONSIVE DESIGN
+   ============================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .custom-spin-buttons {
+        right: 100px;
+    }
+
+    .custom-number-input.size-sm .custom-spin-buttons {
+        right: 85px;
+    }
+
+    .custom-number-input.size-lg .custom-spin-buttons {
+        right: 105px;
+    }
+}
+
+/* Móvil */
+@media (max-width: 640px) {
+    .custom-spin-buttons {
+        right: 95px; /* Menos espacio en móvil */
+    }
+
+    .custom-spin-button {
+        width: 18px;
+        height: 14px;
+    }
+
+    .custom-number-input.size-sm .custom-spin-buttons {
+        right: 80px;
+    }
+
+    .custom-number-input.size-md .custom-spin-buttons {
+        right: 90px;
+    }
+
+    .custom-number-input.size-lg .custom-spin-buttons {
+        right: 100px;
+    }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+    .custom-spin-buttons {
+        right: 85px;
+    }
+
+    .custom-spin-button {
+        width: 16px;
+        height: 12px;
+    }
+
+    .custom-spin-button::before {
+        border-left-width: 2px;
+        border-right-width: 2px;
+    }
+
+    .custom-spin-button.increment::before {
+        border-bottom-width: 3px;
+    }
+
+    .custom-spin-button.decrement::before {
+        border-top-width: 3px;
+    }
+}
+
+/* ==============================================
+   MODO OSCURO
+   ============================================== */
+
+@media (prefers-color-scheme: dark) {
+    .custom-spin-button {
+        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+        border-color: #6b7280;
+        color: #d1d5db;
+    }
+
+    .custom-spin-button:hover {
+        background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+        border-color: #9ca3af;
+        color: #f3f4f6;
+    }
+
+    .custom-spin-button:active {
+        background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+    }
+
+    .custom-number-input
+        input:focus
+        + .custom-spin-buttons
+        .custom-spin-button {
+        border-color: #9ca3af;
+        box-shadow: 0 0 0 1px rgba(156, 163, 175, 0.2);
+    }
+}
+
+/* ==============================================
+   ACCESIBILIDAD
+   ============================================== */
+
+/* Focus visible para navegación por teclado */
+.custom-spin-button:focus-visible {
+    outline: 2px solid #9ca3af;
+    outline-offset: 1px;
+}
+
+/* Soporte para movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .custom-spin-buttons {
+        transition: opacity 0.1s;
+    }
+
+    .custom-spin-button {
+        transition: none;
+    }
+
+    .custom-number-input:hover .custom-spin-buttons {
+        animation: none;
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .custom-spin-button {
+        border-width: 2px;
+        border-color: #000;
+        background: #f9fafb;
+        color: #000;
+    }
+
+    .custom-spin-button:hover {
+        background: #f3f4f6;
+        border-color: #000;
+        color: #000;
+    }
+}
+
+/* ==============================================
+   UTILIDADES HELPER
+   ============================================== */
+
+/* Para ocultar completamente los spin buttons */
+.no-spin-buttons .custom-spin-buttons {
+    display: none !important;
+}
+
+/* Para mantener siempre visibles los spin buttons */
+.always-show-spin-buttons .custom-spin-buttons {
+    opacity: 1 !important;
+}
+
+/* Para inputs muy anchos */
+.custom-number-input.full-width .custom-spin-buttons {
+    right: 100px;
+}
+
+/* Para ajuste manual de posición */
+.spin-buttons-offset-sm {
+    --spin-offset: 10px;
+}
+.spin-buttons-offset-md {
+    --spin-offset: 20px;
+}
+.spin-buttons-offset-lg {
+    --spin-offset: 30px;
+}
+
+.custom-number-input[class*='spin-buttons-offset'] .custom-spin-buttons {
+    right: calc(95px + var(--spin-offset, 0px));
+}
